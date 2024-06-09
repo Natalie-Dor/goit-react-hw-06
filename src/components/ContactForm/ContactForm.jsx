@@ -23,10 +23,16 @@ export default function ContactForm() {
   const nameFieldId = useId();
   const phoneFieldId = useId();
 
-  function handleSubmit(values, actions) {
-    dispatch(addContact(values));
-    actions.resetForm();
-  }
+  // function handleSubmit(values, actions) {
+  //   dispatch(addContact(values));
+  //   actions.resetForm();
+  // }
+  const handleSubmit = event => {
+    event.preventDefault();
+    const form = event.target;
+    dispatch(addContact(form.elements.text.value));
+    form.reset();
+  };
 
   return (
     <Formik
