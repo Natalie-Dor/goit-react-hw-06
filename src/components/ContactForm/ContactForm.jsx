@@ -27,13 +27,21 @@ export default function ContactForm() {
   //   dispatch(addContact(values));
   //   actions.resetForm();
   // }
-  const handleSubmit = event => {
-    event.preventDefault();
-    const form = event.target;
-    dispatch(addContact(form.elements.text.value));
-    form.reset();
-  };
-
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   const form = event.target;
+  //   dispatch(addContact(form.elements.text.value));
+  //   form.reset();
+  // };
+  function handleSubmit(state, action) {
+    const newContact = {
+      id: crypto.randomUUID(),
+      name: state.username,
+      number: state.number,
+    };
+    dispatch(addContact(newContact));
+    action.resetForm();
+  }
   return (
     <Formik
       initialValues={{ username: '', number: '' }}
